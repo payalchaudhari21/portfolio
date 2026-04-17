@@ -1,72 +1,50 @@
 import { motion } from 'framer-motion';
-import { Terminal, Brain, Code2 } from 'lucide-react';
+import { GraduationCap, Laptop, Target } from 'lucide-react';
 
 const About = () => {
   return (
-    <section id="about" className="py-20 relative z-10">
+    <section id="about" className="py-24 relative z-10">
       <div className="container mx-auto px-6 md:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="text-4xl md:text-5xl font-bold font-['Outfit'] text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-gradient">01.</span> About Me
-          </h2>
-          <div className="w-20 h-1 bg-blue-500 rounded-full"></div>
+          About <span className="text-glow">Me</span>
+        </motion.h2>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="glassmorphism p-8 md:p-12 text-center max-w-5xl mx-auto"
+        >
+          <p className="text-lg md:text-xl text-[#aab5c8] leading-relaxed mb-12">
+            A passionate AI & Data Science student from <strong className="text-[#00e0ff]">Sanjay Ghodawat University</strong> with strong interest in Artificial Intelligence, Machine Learning, and Full Stack Development. Experienced in building real-world projects and participating in hackathons.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="glassmorphism card-hover p-8 flex flex-col items-center justify-center border-t border-white/5 bg-white/5 text-center">
+              <GraduationCap className="w-12 h-12 text-[#9d33ff] mb-4" />
+              <h4 className="text-xl font-bold text-white font-['Outfit']">Education</h4>
+              <p className="text-[#aab5c8] mt-2">B.Tech in AI & DS</p>
+            </div>
+
+            <div className="glassmorphism card-hover p-8 flex flex-col items-center justify-center border-t border-white/5 bg-white/5 text-center">
+              <Laptop className="w-12 h-12 text-[#00e0ff] mb-4" />
+              <h4 className="text-xl font-bold text-white font-['Outfit']">Experience</h4>
+              <p className="text-[#aab5c8] mt-2">Hackathons & Projects</p>
+            </div>
+
+            <div className="glassmorphism card-hover p-8 flex flex-col items-center justify-center border-t border-white/5 bg-white/5 text-center">
+              <Target className="w-12 h-12 text-[#ff0055] mb-4" />
+              <h4 className="text-xl font-bold text-white font-['Outfit']">Focus</h4>
+              <p className="text-[#aab5c8] mt-2">Deep Learning & Web</p>
+            </div>
+          </div>
         </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-gray-400 space-y-6 text-lg leading-relaxed"
-          >
-            <p>
-              Hello! I'm Payal, a driven Artificial Intelligence & Data Science student. 
-              My journey in tech began with a deep curiosity about how data can be used to make intelligent decisions.
-              Fast-forward to today, and I've had the privilege of building everything from full-stack applications to deepfake detection systems.
-            </p>
-            <p>
-              My main focus these days is building accessible, inclusive products and digital experiences. 
-              I am highly passionate about Machine Learning and AI, and I love participating in hackathons to challenge my problem-solving skills 
-              under pressure.
-            </p>
-            <p>
-              When I'm not at my computer, I'm usually organizing tech events or guiding my peers as a Class Representative.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-          >
-            <div className="glass-panel p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300">
-              <Brain className="w-10 h-10 text-blue-400 mb-4" />
-              <h3 className="text-white font-semibold text-xl mb-2">AI & ML</h3>
-              <p className="text-gray-500 text-sm">Passionate about building intelligent models and analyzing complex data.</p>
-            </div>
-            
-            <div className="glass-panel p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 mt-0 sm:mt-8">
-              <Code2 className="w-10 h-10 text-purple-400 mb-4" />
-              <h3 className="text-white font-semibold text-xl mb-2">Full Stack</h3>
-              <p className="text-gray-500 text-sm">Crafting beautiful and responsive web applications from front to back.</p>
-            </div>
-            
-            <div className="glass-panel p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 sm:col-span-2">
-              <Terminal className="w-10 h-10 text-green-400 mb-4" />
-              <h3 className="text-white font-semibold text-xl mb-2">Hackathons</h3>
-              <p className="text-gray-500 text-sm">Thriving in fast-paced environments. Participated in Smart India Hackathon and organized the GEN AI Buildathon.</p>
-            </div>
-          </motion.div>
-        </div>
       </div>
     </section>
   );

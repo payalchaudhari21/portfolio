@@ -27,15 +27,13 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? 'glass-panel py-3' : 'bg-transparent py-5'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'glass-panel py-3' : 'bg-transparent py-5'
+        }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-        <a href="#" className="flex items-center gap-2 group">
-          <Code className="text-blue-500 w-8 h-8 group-hover:text-purple-500 transition-colors" />
+        <a href="#" className="flex items-center group">
           <span className="text-xl font-bold font-mono tracking-tighter">
-            PAYAL.<span className="text-blue-500">DEV</span>
+            PAYAL
           </span>
         </a>
 

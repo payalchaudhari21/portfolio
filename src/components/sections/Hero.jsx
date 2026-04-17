@@ -1,94 +1,134 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, Download, Mail, Code2, User, Brain, Code } from 'lucide-react';
+import resumePdf from '../../assets/resume.pdf';
 
 const Hero = () => {
+  const [displayText, setDisplayText] = useState('');
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  const roles = [
+    "AI & Data Science Student",
+    "AI Developer",
+    "Machine Learning Enthusiast"
+  ];
+
+  useEffect(() => {
+    let timeoutId;
+    const currentRole = roles[roleIndex];
+    
+    if (isDeleting) {
+      if (displayText.length > 0) {
+        timeoutId = setTimeout(() => {
+          setDisplayText(currentRole.substring(0, displayText.length - 1));
+        }, 50); // fast deletion
+      } else {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+      }
+    } else {
+      if (displayText.length < currentRole.length) {
+        timeoutId = setTimeout(() => {
+          setDisplayText(currentRole.substring(0, displayText.length + 1));
+        }, 100); // typing speed
+      } else {
+        timeoutId = setTimeout(() => setIsDeleting(true), 2000); // Wait before deleting
+      }
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [displayText, isDeleting, roleIndex]);
+
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 overflow-hidden relative">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]" />
-      </div>
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-24 pb-12 relative z-10 w-full">
+      <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-12">
+
+        {/* Left Content */}
+        <div className="flex-1 max-w-2xl text-left z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block mb-4 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium tracking-wide"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            Available for new opportunities
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold mb-6 tracking-tight text-white leading-tight"
-          >
-            Hi, I'm <span className="text-gradient">Payal Chaudhari</span>
-          </motion.h1>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl md:text-3xl font-medium text-gray-400 mb-8"
-          >
-            AI & Data Science Engineer
-          </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto"
-          >
-            "Building intelligent systems that solve real-world problems. Passionate about machine learning, full-stack development, and creating highly interactive user experiences."
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <a
-              href="#projects"
-              className="w-full sm:w-auto px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium flex items-center justify-center gap-2 transition-all transform hover:scale-105"
+            <h2 className="text-2xl text-[#00e0ff] font-medium mb-2 font-['Outfit']">
+              Hello, I'm
+            </h2>
+
+            <h1 className="text-5xl md:text-[4rem] font-extrabold mb-4 text-gradient leading-tight font-['Outfit']">
+              Payal Kailas Chaudhari
+            </h1>
+
+            <div className="text-2xl md:text-3xl font-semibold text-[#aab5c8] mb-4 h-10 flex items-center font-['Outfit']">
+              <span className="text-[#9d33ff]">{displayText}</span>
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ repeat: Infinity, duration: 0.8 }}
+                className="ml-1 text-[#aab5c8]"
+              >|</motion.span>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="text-lg md:text-xl text-white font-medium mb-2 max-w-lg"
             >
-              View My Work <ArrowRight className="w-5 h-5" />
-            </a>
+              Building intelligent systems using AI, deep learning, and full-stack technologies.
+            </motion.p>
             
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              download
-              className="w-full sm:w-auto px-8 py-3 rounded-full border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white font-medium flex items-center justify-center gap-2 transition-all hover:bg-white/5"
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.5 }}
+              className="text-[#aab5c8] mb-8 max-w-lg"
             >
-              Download Resume <Download className="w-5 h-5" />
-            </a>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="mt-16 flex items-center justify-center gap-6"
-          >
-            {[
-              { icon: <Github className="w-6 h-6" />, href: 'https://github.com/Payal-Chaudhari' },
-              { icon: <Linkedin className="w-6 h-6" />, href: '#' },
-              { icon: <Mail className="w-6 h-6" />, href: 'mailto:contact@payal.dev' }
-            ].map((social, i) => (
-              <a
-                key={i}
-                href={social.href}
-                className="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500/50 transition-all hover:-translate-y-1"
-              >
-                {social.icon}
+              Passionate about solving real-world problems using data-driven and AI-powered solutions.
+            </motion.p>
+
+            <div className="flex flex-wrap gap-4">
+              <a href="#projects" className="px-7 py-3 rounded-full glow-btn flex items-center gap-2 font-['Outfit'] font-semibold hover:scale-105 transition-transform duration-300">
+                <span>View Projects</span> <ArrowRight className="w-5 h-5" />
               </a>
-            ))}
+              <a href={resumePdf} target="_blank" rel="noopener noreferrer" className="px-7 py-3 rounded-full glassmorphism flex items-center gap-2 font-['Outfit'] font-semibold border border-[#9d33ff]/40 text-[#f8f8ff] hover:bg-[#9d33ff]/10 hover:border-[#9d33ff] hover:shadow-[0_0_15px_rgba(157,51,255,0.4)] hover:scale-105 transition-all duration-300">
+                <span>View Resume</span> <Download className="w-5 h-5" />
+              </a>
+              <a href="#contact" className="px-7 py-3 rounded-full glassmorphism flex items-center gap-2 font-['Outfit'] font-semibold border border-[#00e0ff]/30 text-[#f8f8ff] hover:bg-[#00e0ff]/10 hover:border-[#00e0ff] hover:shadow-[0_0_15px_rgba(0,224,255,0.4)] hover:scale-105 transition-all duration-300">
+                <span>Contact Me</span> <Mail className="w-5 h-5" />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right Content / Image placeholder */}
+        <div className="flex-1 justify-center mt-12 md:mt-0 relative z-10 w-full max-w-md hidden md:flex">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative w-72 h-72 lg:w-80 lg:h-80"
+          >
+            {/* The wrapper mimics the CSS morphing shape */}
+            <div className="w-full h-full rounded-[50%] bg-[#030305] glassmorphism flex items-center justify-center relative z-10 shadow-[0_0_50px_rgba(0,240,255,0.1)] before:content-[''] before:absolute before:-inset-1 before:rounded-[50%] before:bg-gradient-to-r before:from-[#00e0ff] before:via-[#9d33ff] before:to-[#ff0055] before:-z-10 before:animate-[spin_4s_linear_infinite]">
+              <User className="w-24 h-24 text-[#aab5c8]" />
+            </div>
+
+            {/* Badges */}
+            <motion.div
+              animate={{ y: [-10, 10, -10] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="absolute -top-4 -right-8 px-5 py-2 glassmorphism rounded-full flex items-center gap-2 font-['Outfit'] font-semibold text-sm z-20 shadow-lg border border-[#00e0ff]/30 hover:border-[#00e0ff]/80 transition-all cursor-default"
+            >
+              <Brain className="w-4 h-4 text-[#00e0ff]" /> AI/ML
+            </motion.div>
+
+            <motion.div
+              animate={{ y: [10, -10, 10] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              className="absolute -bottom-4 -left-8 px-5 py-2 glassmorphism rounded-full flex items-center gap-2 font-['Outfit'] font-semibold text-sm z-20 shadow-lg border border-[#9d33ff]/30 hover:border-[#9d33ff]/80 transition-all cursor-default"
+            >
+              <Code className="w-4 h-4 text-[#9d33ff]" /> Full Stack
+            </motion.div>
           </motion.div>
         </div>
       </div>

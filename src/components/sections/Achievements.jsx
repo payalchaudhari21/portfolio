@@ -19,7 +19,7 @@ const Achievements = () => {
     <section className="py-20 relative z-10">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid md:grid-cols-2 gap-16">
-          
+
           {/* Why Hire Me */}
           <div>
             <motion.div
@@ -34,7 +34,7 @@ const Achievements = () => {
               </h2>
               <div className="w-16 h-1 bg-blue-500 rounded-full"></div>
             </motion.div>
-            
+
             <div className="space-y-6">
               {reasons.map((item, index) => (
                 <motion.div
@@ -71,7 +71,7 @@ const Achievements = () => {
               </h2>
               <div className="w-16 h-1 bg-purple-500 rounded-full"></div>
             </motion.div>
-            
+
             <div className="grid gap-4">
               {achievements.map((achievement, index) => (
                 <motion.div
@@ -88,7 +88,7 @@ const Achievements = () => {
               ))}
             </div>
           </div>
-          
+
         </div>
       </div>
     </section>
